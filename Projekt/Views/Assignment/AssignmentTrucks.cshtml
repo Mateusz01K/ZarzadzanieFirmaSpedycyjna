@@ -1,0 +1,65 @@
+﻿@model Projekt.Models.AssignmentTruck.AssignmentViewModel
+@{
+    ViewData["Title"] = "Przypisz ciężarówkę";
+}
+<div class="text-center">
+    <h1 class="display-4">Przypisz ciężarówkę</h1>
+    <p>Wybierz ID ciężarówki którą chcesz przypisać, a następnie imie i nazwisko</p>
+</div>
+<div class="text-center d-flex mb-5">
+        <table class="table table-hover m-2">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Przypisany kierowca</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Trucks)
+                {
+                    <tr>
+                        <td scope="row">@item.Id</td>
+                        <td scope="row">@item.Model</td>
+                        <td scope="row">@item.IsAssignedUser</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    <table class="table table-hover m-2">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Imie</th>
+                    <th scope="col">Nazwisko</th>
+                    <th scope="col">Przypisana ciężarówka</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Users)
+                {
+                    <tr>
+                        <td scope="row">@item.Id</td>
+                        <td scope="row">@item.FirstName</td>
+                        <td scope="row">@item.LastName</td>
+                        <td scope="row">@item.IsAssignedTruck</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+</div>
+<form method="post" asp-controller="Assignment" asp-action="AssignmentThisTruck">
+    <div class="form-group">
+        <label for="Id">ID ciężarówki: <span style="color:red">*</span></label>
+        <input type="number" class="form-control" id="Id" placeholder="ID ciężarówki" name="truckId">
+    </div>
+    <div class="form-group">
+        <label for="Id">ID kierowcy: <span style="color:red">*</span></label>
+        <input type="number" class="form-control" id="Id" placeholder="ID kierowcy" name="userId">
+    </div>
+
+    <div class="text-center m-5">
+        <button type="submit" class="btn btn-success">Przypisz</button>
+        <a class="btn btn-danger" href="javascript: history.go(-1)">Wróć</a>
+    </div>
+</form>

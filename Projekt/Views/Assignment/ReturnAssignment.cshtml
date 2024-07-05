@@ -1,0 +1,49 @@
+﻿@model Projekt.Models.AssignmentTruck.AssignmentViewModel
+@{
+    ViewData["Title"] = "Zwróć ciężarówkę";
+}
+@if (TempData["message"] != null)
+{
+    <script>
+        alert('@TempData["message"]');
+    </script>
+}
+<div class="text-center">
+    <h1 class="display-4">Lista przypisań</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Model</th>
+                <th scope="col">Imię i nazwisko kierowcy</th>
+                <th scope="col">Data przypisania</th>
+                <th scope="col">Data zwrotu</th>
+                <th scope="col">Czy zwrócono?</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AssignmentTrucks)
+            {
+                <tr>
+                    <td scope="row">@item.Id</td>
+                    <td scope="row">@item.Truck.Model</td>
+                    <td scope="row">@item.User.FirstName @item.User.LastName</td>
+                    <td scope="row">@item.AssignmentDate.ToShortDateString()</td>
+                    <td scope="row">@item.ReturnDate.ToShortDateString()</td>
+                    <td scope="row">@(item.IsReturned ? "Zwrócono" : "Nie zwrócono")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+    <form method="post" asp-controller="Assignment" asp-action="ReturnThisAssignment">
+        <div class="form-group">
+            <label for="Id">ID przypisania: <span style="color:red">*</span></label>
+            <input type="number" class="form-control" id="Id" placeholder="ID przypisania" name="Id">
+        </div>
+        <div class="text-center m-5">
+            <button type="submit" class="btn btn-success">Zwróć</button>
+            <a class="btn btn-danger" href="javascript: history.go(-1)">Wróć</a>
+        </div>
+    </form>
+

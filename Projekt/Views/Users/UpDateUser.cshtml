@@ -1,0 +1,57 @@
+﻿@model Projekt.Models.Users.UserViewModel
+@{
+    ViewData["Title"] = "Edytuj użytkownika";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Użytkownicy</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Adres e-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td scope="row">@item.Id</td>
+                    <td scope="row">@item.FirstName</td>
+                    <td scope="row">@item.LastName</td>
+                    <td scope="row">@item.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<form method="put" asp-controller="Users" asp-action="UpDateThisUser">
+
+        <div class="form-group">
+        <label for="Id">Id do zmiany: <span style="color:red">*</span></label>
+        <input type="text" class="form-control" id="Id" placeholder="Id" name="Id">
+        </div>
+
+        <div class="form-group">
+        <label for="firstname">Imie: <span style="color:red">*</span></label>
+            <input type="text" class="form-control" id="firstname" placeholder="Imie" name="firstname">
+        </div>
+
+        <div class="form-group">
+        <label for="lastname">Nazwisko: <span style="color:red">*</span></label>
+            <input type="text" class="form-control" id="lastname" placeholder="Nazwisko" name="lastname">
+        </div>
+
+        <div class="form-group">
+        <label for="email">E-mail: <span style="color:red">*</span></label>
+            <input type="text" class="form-control" id="email" placeholder="E-mail" name="email">
+        </div>
+
+        <div class="text-center m-5">
+            <button type="submit" class="btn btn-success">Edytuj</button>
+            <a class="btn btn-danger" href="javascript: history.go(-1)">Wróć</a>
+        </div>
+</form>

@@ -1,0 +1,41 @@
+﻿@model Projekt.Models.Users.UserViewModel
+@{
+    ViewData["Title"] = "Usuń użytkownika";
+}
+<div class="text-center">
+    <h1 class="display-4">Użytkownicy</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Adres e-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Users)
+            {
+                <tr>
+                    <td scope="row">@item.Id</td>
+                    <td scope="row">@item.FirstName</td>
+                    <td scope="row">@item.LastName</td>
+                    <td scope="row">@item.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<form method="delete" asp-controller="Users" asp-action="DeleteThisUser">
+
+        <div class="form-group m-4">
+        <label for="Id">Wprowadź ID: <span style="color:red">*</span></label>
+            <input type="number" class="form-control" id="Id" placeholder="ID" name="Id">
+        </div>
+
+        <div class="text-center m-5">
+            <button type="submit" class="btn btn-danger">Usuń</button>
+            <a class="btn btn-outline-danger" href="javascript: history.go(-1)">Wróć</a>
+    </div>
+</form>

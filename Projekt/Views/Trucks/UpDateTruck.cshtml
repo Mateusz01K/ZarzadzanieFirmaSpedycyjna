@@ -1,0 +1,63 @@
+﻿@model Projekt.Models.Trucks.TrucksViewModel
+@{
+    ViewData["Title"] = "Edycja ciężarówki";
+}
+<div class="text-center mb-5">
+    <h1 class="display-4">Lista ciężarówek</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Model</th>
+                <th scope="col">Marka</th>
+                <th scope="col">Moc</th>
+                <th scope="col">Dystans</th>
+                <th scope="col">Rok produkcji</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.Trucks)
+            {
+                <tr>
+                    <td scope="row">@item.Id</td>
+                    <td scope="row">@item.Model</td>
+                    <td scope="row">@item.Brand</td>
+                    <td scope="row">@item.Power</td>
+                    <td scope="row">@item.Distance</td>
+                    <td scope="row">@item.YearOfProduction</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<form method="put" asp-controller="Trucks" asp-action="UpDateThisTruck">
+    <div class="form-group">
+        <label for="ID">ID: <span style="color:red">*</span></label>
+        <input type="number" class="form-control" id="ID" placeholder="Id" name="ID">
+    </div>
+    <div class="form-group">
+        <label for="model">Model: <span style="color:red">*</span></label>
+        <input type="text" class="form-control" id="model" placeholder="Model" name="model">
+    </div>
+    <div class="form-group">
+        <label for="brand">Marka: <span style="color:red">*</span></label>
+        <input type="text" class="form-control" id="brand" placeholder="Marka" name="brand">
+    </div>
+    <div class="form-group">
+        <label for="power">Moc: <span style="color:red">*</span></label>
+        <input type="number" class="form-control" id="power" placeholder="Moc" name="power">
+    </div>
+    <div class="form-group">
+        <label for="distance">Przebieg: <span style="color:red">*</span></label>
+        <input type="number" class="form-control" id="distance" placeholder="Przebieg" name="distance">
+    </div>
+    <div class="form-group">
+        <label for="yearofproduction">Rok produkcji: <span style="color:red">*</span></label>
+        <input type="number" class="form-control" id="yearofproduction" placeholder="Rok produkcji" name="yearofproduction">
+    </div>
+    <div class="text-center m-5">
+        <button type="submit" class="btn btn-success">Wprowadź</button>
+        <a class="btn btn-danger" href="javascript: history.go(-1)">Wróć</a>
+    </div>
+</form>

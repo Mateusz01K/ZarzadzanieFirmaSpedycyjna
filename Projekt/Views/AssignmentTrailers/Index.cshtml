@@ -1,0 +1,43 @@
+﻿@model Projekt.Models.AssignTrailerToTruck.AssignTrailerToTruckViewModel
+@{
+    ViewData["Title"] = "Lista przypisań przyczep do ciężarówek";
+}
+@if (TempData["message"] != null)
+{
+    <script>
+        alert('@TempData["message"]');
+    </script>
+}
+<div class="text-center">
+    <h1 class="display-4">Lista przypisań przyczep do ciężarówek</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Model przyczepy</th>
+                <th scope="col">Model ciężarówki</th>
+                <th scope="col">Data przypisania</th>
+                <th scope="col">Data zwrotu</th>
+                <th scope="col">Czy zwrócono?</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AssignmentTrailers)
+            {
+                <tr>
+                    <td scope="row">@item.Id</td>
+                    <td scope="row">@item.Trailer.Id</td>
+                    <td scope="row">@item.Truck.Id</td>
+                    <td scope="row">@item.AssignmentDate.ToShortDateString()</td>
+                    <td scope="row">@item.ReturnDate.ToShortDateString()</td>
+                    <td scope="row">@(item.IsReturned ? "Zwrócono" : "Nie zwrócono")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-center m-5">
+        <a class="btn btn-outline-success" asp-area="" asp-controller="AssignmentTrailers" asp-action="AssignTrailer" role="button">Przypisz</a>
+        <a class="btn btn-outline-warning" asp-area="" asp-controller="AssignmentTrailers" asp-action="DeleteAssignTrailer" role="button">Anuluj przypisanie</a>
+        <a class="btn btn-outline-danger" asp-area="" asp-controller="AssignmentTrailers" asp-action="ReturnAssignTrailer" role="button">Zwróć przyczepę</a>
+    </div>
+</div>
